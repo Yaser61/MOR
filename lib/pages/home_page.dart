@@ -1,7 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobil_optik_okuyucu/pages/sinavlar_page.dart';
 
-class HomePage extends StatelessWidget {
+import '../utils/utility.dart';
+
+class HomePage extends StatefulWidget {
+  HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  ValueNotifier<XFile?> image = ValueNotifier(null);
+  ValueNotifier<String> text = ValueNotifier("");
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,10 +37,31 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               // Üst kısımda logo
-              Container(
-                  margin: EdgeInsets.only(bottom: 10.0),
-                  child: Image.asset('assets/image/kamera.png',
-                      width: 90, height: 90)),
+              IconButton(
+                onPressed: () {
+                  imagePick(ImageSource.camera);
+                },
+                icon: const Icon(Icons.camera_alt_outlined),
+                iconSize: 50,
+              ),
+              const SizedBox(height: 40),
+              ValueListenableBuilder(
+                valueListenable: image,
+                builder: (_,__,___) {
+                  return Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: FileImage(
+                          File(image.value?.path ?? ""),
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                }
+              ),
 
               // İki butonlu satır
 
@@ -69,5 +105,11 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void imagePick(ImageSource imageSource) async {
+    image.value = await Utility().pickImageFromGallery(imageSource);
+    // veritabanı işlemlerini burda yapabilirsin
+    debugPrint("image path ${image.value?.path ?? ""}");
   }
 }
