@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobil_optik_okuyucu/pages/home_page.dart';
+import 'package:mobil_optik_okuyucu/pages/sinavlar_page.dart';
 // ignore: unused_import
 import 'package:mobil_optik_okuyucu/widgets/bottom_icons.dart';
 
@@ -26,7 +27,13 @@ class _AnalysisPageState extends State<AnalysisPage> {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
         },
-        onPressed2: () {},
+        onPressed2: () {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SinavlarPage(),
+              ));
+        },
         onPressed3: () {},
         onPressed4: () {},
       ),
