@@ -1,47 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:mobil_optik_okuyucu/pages/home_page.dart';
+// ignore: unused_import
+import 'package:mobil_optik_okuyucu/widgets/bottom_icons.dart';
 
-class SinavlarPage extends StatelessWidget {
+class SinavlarPage extends StatefulWidget {
+  @override
+  _SinavlarPageState createState() => _SinavlarPageState();
+}
+
+class _SinavlarPageState extends State<SinavlarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sınavlar'),
-        actions: <Widget>[
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) {
-              return <PopupMenuEntry>[
-                PopupMenuItem(
-                  child: Text('Sınav Ekle'),
-                  value: 'ekle',
-                ),
-                PopupMenuItem(
-                  child: Text('Sınavları Düzenle'),
-                  value: 'duzenle',
-                ),
-                PopupMenuItem(
-                  child: Text('Sınavları Sil'),
-                  value: 'sil',
-                ),
-              ];
-            },
-            onSelected: (value) {
-              // Seçilen işleme göre işlevleri burada tanımlayabilirsiniz.
-              if (value == 'ekle') {
-
-              } else if (value == 'duzenle') {
-
-              } else if (value == 'sil') {
-
-              }
-            },
-          ),
-        ],
       ),
       body: Center(
         child: Text(
           'Sınavlar Sayfası',
           style: TextStyle(fontSize: 24.0),
         ),
+      ),
+      bottomNavigationBar: BottomIcons(
+        onPressed1: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
+        },
+        onPressed2: () {},
+        onPressed3: () {},
+        onPressed4: () {},
       ),
     );
   }

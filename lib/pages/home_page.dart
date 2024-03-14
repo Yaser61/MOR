@@ -1,8 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mobil_optik_okuyucu/pages/analysis_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobil_optik_okuyucu/pages/sinavlar_page.dart';
+import 'package:mobil_optik_okuyucu/pages/students_page.dart';
+// ignore: unused_import
+import 'package:mobil_optik_okuyucu/widgets/bottom_icons.dart';
 
 import '../utils/utility.dart';
 
@@ -22,7 +26,75 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Ana Sayfa'),
+          backgroundColor: const Color(0xFFddcbdc),
+          title: const Row(
+            children: [
+              Icon(Icons.home_work_outlined, color: Colors.black),
+              SizedBox(width: 8),
+              Text(
+                "Mobil Optik Okuyucu",
+                style: TextStyle(color: Colors.black),
+              )
+            ],
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 247, 235, 249),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: const BoxDecoration(
+                  color: Color(
+                      0xFFddcbdc), // Açılır menü başlığının arka plan rengi
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'assets/images/kucuklogo.png',
+                      width: 80,
+                      height: 80,
+                    ),
+                    const SizedBox(width: 10, height: 20),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "HIZLI, GÜVENİLİR VE KOLAY",
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w900,
+                            wordSpacing: 2.0,
+                          ),
+                        ),
+                        Text(
+                          "Optical Monster",
+                          style: TextStyle(
+                            wordSpacing: 2.0,
+                            decoration: TextDecoration.underline,
+                            decorationThickness: 2.0,
+                            fontSize: 15,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              ListTile(
+                title: const Text('Sınavlar'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SinavlarPage()),
+                  );
+                },
+              ),
+              // İsteğe bağlı olarak diğer menü öğelerini buraya ekleyebilirsiniz
+            ],
+          ),
         ),
         body: Center(
           child: Column(
@@ -30,10 +102,13 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 50),
-                child: Image.asset(
-                  'assets/image/logo.png',
-                  width: 200,
-                  height: 200,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    width: 200,
+                    height: 200,
+                  ),
                 ),
               ),
               // Üst kısımda logo
@@ -68,35 +143,104 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
+                  ClipRRect(
+                    borderRadius: const BorderRadius.horizontal(
+                      left: Radius.circular(50),
+                      right: Radius.circular(0),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SinavlarPage()));
-                    },
-                    child: Text('Buton 1'),
+                              builder: (context) => SinavlarPage()),
+                        );
+                      },
+                      child: const Text('Sınavlar       '),
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color(0xFFFFBE0B),
+                        onPrimary: Colors.black,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                      ),
+                    ),
                   ),
-                  SizedBox(width: 20.0),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Buton 2'),
+                  const SizedBox(
+                    width: 20.0,
+                    height: 1.0,
+                  ),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.horizontal(
+                      left: Radius.circular(0),
+                      right: Radius.circular(50),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StudentsPage()),
+                        );
+                      },
+                      child: const Text('   Öğrenciler'),
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color(0xFFFFBE0B),
+                        onPrimary: Colors.black,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                      ),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 20.0),
-              // İki butonlu satır
+              const SizedBox(height: 20.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Buton 3'),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.horizontal(
+                      left: Radius.circular(50),
+                      right: Radius.circular(0),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AnalysisPage()),
+                        );
+                      },
+                      child: const Text('Raporlar    '),
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color(0xFFFFBE0B),
+                        onPrimary: Colors.black,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                      ),
+                    ),
                   ),
-                  SizedBox(width: 20.0),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Buton 4'),
+                  const SizedBox(width: 20.0),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.horizontal(
+                      left: Radius.circular(0),
+                      right: Radius.circular(50),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SinavlarPage()),
+                        );
+                      },
+                      child: const Text('Bulamadım ?'),
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color(0xFFFFBE0B),
+                        onPrimary: Colors.black,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                      ),
+                    ),
                   ),
                 ],
               ),
